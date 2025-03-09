@@ -3,7 +3,6 @@ import pandas as pd
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
-from dotenv import load_dotenv
 import time
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
@@ -24,18 +23,17 @@ import plotly.graph_objects as go
 # 페이지 설정
 st.set_page_config(
     page_title="Survey Management System",
-    page_icon="��",
+    page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# 환경 변수 로드
-load_dotenv()
+# 환경 변수 로드 대신 Streamlit secrets 사용
+# load_dotenv()  # 이 줄 제거
 
 # OpenAI API 키 설정
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-if OPENAI_API_KEY:
-    client = OpenAI(api_key=OPENAI_API_KEY)
+if 'openai' in st.secrets:
+    client = OpenAI(api_key=st.secrets['openai']['api_key'])
 else:
     client = None
 
