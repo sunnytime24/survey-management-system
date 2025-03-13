@@ -912,6 +912,7 @@ def main():
         # 모든 사용자용 메뉴
         st.page_link("streamlit_app_email_simple.py", label="SK AI Camp Portal", icon="🎓")
         st.page_link("pages/chatbot_faq.py", label="AI 챗봇 & FAQ", icon="🤖")
+        st.page_link("pages/survey_management.py", label="Survey Management", icon="📊")
         
         # 관리자용 메뉴
         if st.session_state.is_admin:
