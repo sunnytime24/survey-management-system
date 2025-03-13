@@ -20,7 +20,6 @@ from openai import OpenAI
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
-from dotenv import load_dotenv
 import smtplib
 import httpx
 
@@ -31,14 +30,16 @@ st.set_page_config(
     layout="wide"
 )
 
-# 환경 변수 로드 대신 Streamlit secrets 사용
-# load_dotenv()  # 이 줄 제거
-
-# OpenAI API 키 설정
+# OpenAI API 키 설정 (Streamlit secrets 사용)
 if 'openai' in st.secrets:
     client = OpenAI(api_key=st.secrets['openai']['api_key'])
 else:
+    st.error("OpenAI API 키가 설정되지 않았습니다. Streamlit Cloud의 Secrets에서 설정해주세요.")
     client = None
+
+# 이메일 설정 (Streamlit secrets 사용)
+EMAIL_ADDRESS = st.secrets.get("email", {}).get("gmail_user")
+EMAIL_PASSWORD = st.secrets.get("email", {}).get("admin_email")
 
 # Gmail API 스코프 설정
 SCOPES = [
