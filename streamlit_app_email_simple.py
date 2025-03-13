@@ -907,15 +907,15 @@ def main():
         
         # 메뉴 표시
         st.markdown("### 메뉴")
-        if st.session_state.is_admin:
-            # 관리자용 메뉴
-            st.page_link("streamlit_app_email_simple.py", label="Survey Management System", icon="📊")
-            st.page_link("pages/survey_generator.py", label="설문지 생성기", icon="📝")
         
         # 모든 사용자용 메뉴
         st.page_link("streamlit_app_email_simple.py", label="SK AI Camp Portal", icon="🎓")
         st.page_link("pages/chatbot_faq.py", label="AI 챗봇 & FAQ", icon="🤖")
-    
+        
+        # 관리자용 메뉴
+        if st.session_state.is_admin:
+            st.page_link("pages/survey_management.py", label="Survey Management", icon="📊")
+
     # 메인 컨텐츠
     if st.session_state.is_admin:
         # 관리자용 메뉴
