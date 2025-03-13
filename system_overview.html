@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survey Management System 기획서</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #2563EB;
+            margin-top: 2em;
+        }
+        .section {
+            margin-bottom: 2em;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        .feature-card {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .highlight {
+            background: #dbeafe;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #2563EB;
+            color: white;
+        }
+        .workflow {
+            background: #f0f9ff;
+            padding: 15px;
+            border-left: 4px solid #2563EB;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>📊 Survey Management System 기획서</h1>
+    
+    <div class="section">
+        <h2>1. 시스템 개요</h2>
+        <p>Survey Management System은 교육 프로그램의 만족도 조사를 효율적으로 관리하고, 응답률을 높이기 위한 통합 플랫폼입니다. OpenAI를 활용한 설문 문항 자동 생성부터 응답 현황 분석, 리마인더 발송까지 전체 프로세스를 관리합니다.</p>
+    </div>
+
+    <div class="section">
+        <h2>2. 목적</h2>
+        <div class="feature-card">
+            <h3>주요 목적</h3>
+            <ul>
+                <li>교육 만족도 조사 프로세스 자동화</li>
+                <li>응답률 향상을 위한 효율적인 리마인더 시스템 구축</li>
+                <li>데이터 기반 교육 품질 개선</li>
+                <li>관리자의 업무 효율성 증대</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>3. 주요 기능</h2>
+        
+        <h3>3.1 Survey 생성 및 관리</h3>
+        <div class="feature-card">
+            <ul>
+                <li>OpenAI 활용 설문 문항 자동 생성</li>
+                <li>Google Forms 연동</li>
+                <li>설문 템플릿 관리</li>
+                <li>JSON 형식 다운로드 지원</li>
+            </ul>
+        </div>
+
+        <h3>3.2 대상자 관리</h3>
+        <div class="feature-card">
+            <ul>
+                <li>Google Sheets 연동을 통한 대상자 목록 관리</li>
+                <li>Excel/CSV 파일 업로드 지원</li>
+                <li>대상자 그룹 관리</li>
+                <li>실시간 데이터 동기화</li>
+            </ul>
+        </div>
+
+        <h3>3.3 응답 현황 분석</h3>
+        <div class="feature-card">
+            <ul>
+                <li>실시간 응답률 모니터링</li>
+                <li>Plotly 기반 인터랙티브 차트</li>
+                <li>만족도 분포 시각화</li>
+                <li>부서별/그룹별 분석</li>
+            </ul>
+        </div>
+
+        <h3>3.4 리마인더 시스템</h3>
+        <div class="feature-card">
+            <ul>
+                <li>미응답자 자동 식별</li>
+                <li>맞춤형 리마인더 이메일 발송</li>
+                <li>발송 현황 실시간 추적</li>
+                <li>Gmail API 활용 안정적인 메일 발송</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>4. 대상 사용자</h2>
+        <table>
+            <tr>
+                <th>사용자 유형</th>
+                <th>주요 활용 기능</th>
+            </tr>
+            <tr>
+                <td>교육 담당자</td>
+                <td>
+                    <ul>
+                        <li>설문 생성 및 관리</li>
+                        <li>응답 현황 모니터링</li>
+                        <li>리마인더 발송</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>교육 운영자</td>
+                <td>
+                    <ul>
+                        <li>대상자 목록 관리</li>
+                        <li>응답 데이터 분석</li>
+                        <li>결과 리포트 생성</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>관리자</td>
+                <td>
+                    <ul>
+                        <li>전체 시스템 관리</li>
+                        <li>API 키 및 인증 관리</li>
+                        <li>사용자 권한 관리</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>5. 시스템 워크플로우</h2>
+        
+        <div class="workflow">
+            <h3>5.1 Survey 생성 프로세스</h3>
+            <ol>
+                <li>교육 대상, 목적, 요구사항 입력</li>
+                <li>OpenAI를 통한 설문 문항 자동 생성</li>
+                <li>문항 검토 및 수정</li>
+                <li>Google Forms 생성 또는 JSON 다운로드</li>
+            </ol>
+        </div>
+
+        <div class="workflow">
+            <h3>5.2 응답 관리 프로세스</h3>
+            <ol>
+                <li>대상자 목록 등록 (Sheets/파일 업로드)</li>
+                <li>설문 링크 공유</li>
+                <li>실시간 응답 현황 모니터링</li>
+                <li>미응답자 대상 리마인더 발송</li>
+                <li>최종 응답 데이터 분석</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>6. 기대 효과</h2>
+        <div class="feature-card">
+            <ul>
+                <li>설문 제작 시간 단축 (AI 활용)</li>
+                <li>응답률 향상 (효율적인 리마인더 시스템)</li>
+                <li>데이터 기반 의사결정 지원</li>
+                <li>관리자 업무 효율성 증대</li>
+                <li>교육 품질 개선을 위한 인사이트 도출</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>7. 기술 스택</h2>
+        <table>
+            <tr>
+                <th>구분</th>
+                <th>사용 기술</th>
+            </tr>
+            <tr>
+                <td>프론트엔드</td>
+                <td>Streamlit, Plotly</td>
+            </tr>
+            <tr>
+                <td>백엔드</td>
+                <td>Python</td>
+            </tr>
+            <tr>
+                <td>데이터 저장</td>
+                <td>Google Sheets</td>
+            </tr>
+            <tr>
+                <td>API 연동</td>
+                <td>OpenAI API, Gmail API, Google Sheets API</td>
+            </tr>
+            <tr>
+                <td>인증</td>
+                <td>OAuth 2.0</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html> 

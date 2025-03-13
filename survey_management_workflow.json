@@ -1,0 +1,160 @@
+{
+    "name": "Survey Management System Workflow",
+    "nodes": [
+        {
+            "parameters": {
+                "path": "/survey",
+                "options": {
+                    "raw": {
+                        "method": "GET"
+                    }
+                },
+                "responseMode": "responseNode"
+            },
+            "name": "Survey Dashboard",
+            "type": "n8n-nodes-base.webhook",
+            "position": [100, 100]
+        },
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "resource": "spreadsheet",
+                "operation": "read",
+                "documentId": "={{ $json.sheetId }}"
+            },
+            "name": "Google Sheets",
+            "type": "n8n-nodes-base.googleSheets",
+            "position": [300, 100]
+        },
+        {
+            "parameters": {
+                "authentication": "apiKey",
+                "apiKey": "={{ $env.OPENAI_API_KEY }}",
+                "model": "gpt-3.5-turbo",
+                "prompt": "={{ $json.surveyPrompt }}",
+                "options": {
+                    "temperature": 0.7
+                }
+            },
+            "name": "OpenAI",
+            "type": "n8n-nodes-base.openAi",
+            "position": [300, 300]
+        },
+        {
+            "parameters": {
+                "authentication": "oAuth2",
+                "operation": "sendEmail",
+                "to": "={{ $json.recipientEmail }}",
+                "subject": "={{ $json.emailSubject }}",
+                "text": "={{ $json.emailBody }}"
+            },
+            "name": "Gmail",
+            "type": "n8n-nodes-base.gmail",
+            "position": [500, 100]
+        },
+        {
+            "parameters": {
+                "conditions": {
+                    "string": [
+                        {
+                            "value1": "={{ $json.operation }}",
+                            "operation": "equal",
+                            "value2": "createSurvey"
+                        }
+                    ]
+                }
+            },
+            "name": "Router",
+            "type": "n8n-nodes-base.switch",
+            "position": [200, 200]
+        }
+    ],
+    "connections": {
+        "Survey Dashboard": {
+            "main": [
+                [
+                    {
+                        "node": "Router",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        },
+        "Router": {
+            "main": [
+                [
+                    {
+                        "node": "OpenAI",
+                        "type": "main",
+                        "index": 0
+                    }
+                ],
+                [
+                    {
+                        "node": "Google Sheets",
+                        "type": "main",
+                        "index": 0
+                    }
+                ]
+            ]
+        }
+    },
+    "settings": {
+        "executionOrder": "v1",
+        "saveDataErrorExecution": "all",
+        "saveDataSuccessExecution": "all",
+        "saveExecutionProgress": true,
+        "timezone": "Asia/Seoul"
+    },
+    "staticData": {
+        "node:Survey Dashboard": {
+            "webhookId": "survey-management-system"
+        }
+    },
+    "tags": ["survey", "automation"],
+    "createdAt": "2024-03-21T00:00:00.000Z",
+    "updatedAt": "2024-03-21T00:00:00.000Z",
+    "env": {
+        "OPENAI_API_KEY": "",
+        "GOOGLE_SHEETS_OAUTH2": {
+            "clientId": "",
+            "clientSecret": "",
+            "accessToken": "",
+            "refreshToken": "",
+            "scope": [
+                "https://www.googleapis.com/auth/spreadsheets",
+                "https://www.googleapis.com/auth/gmail.send"
+            ]
+        }
+    },
+    "endpoints": [
+        {
+            "path": "/survey/create",
+            "method": "POST",
+            "description": "설문 생성 엔드포인트",
+            "parameters": {
+                "target": "교육 대상",
+                "purpose": "설문 목적",
+                "requirements": "필수 포함 항목"
+            }
+        },
+        {
+            "path": "/survey/reminder",
+            "method": "POST",
+            "description": "리마인더 발송 엔드포인트",
+            "parameters": {
+                "surveyId": "설문 ID",
+                "recipients": ["이메일 목록"]
+            }
+        },
+        {
+            "path": "/survey/status",
+            "method": "GET",
+            "description": "응답 현황 조회 엔드포인트",
+            "parameters": {
+                "surveyId": "설문 ID"
+            }
+        }
+    ]
+} 

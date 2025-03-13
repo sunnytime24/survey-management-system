@@ -1,0 +1,146 @@
+{
+  "date": "2024-03-21",
+  "conversations": [
+    {
+      "topic": "설문 문항 생성 시스템 개선",
+      "changes": [
+        {
+          "feature": "OpenAI API 호환성",
+          "details": [
+            "OpenAI API 버전 1.0.0 이상 지원",
+            "환경 변수 설정 방식 변경",
+            "API 키 관리 개선"
+          ]
+        },
+        {
+          "feature": "Survey 생성 기능",
+          "details": [
+            "OpenAI를 활용한 설문 문항 자동 생성",
+            "Google Forms 연동 옵션",
+            "JSON 형식 다운로드 지원"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "리마인더 시스템 개선",
+      "changes": [
+        {
+          "feature": "대상자 관리",
+          "details": [
+            "등록된 대상자 목록에서 선택 기능 추가",
+            "Google Sheets 연동 옵션 유지",
+            "파일 업로드 옵션 유지",
+            "실시간 데이터 로드 및 표시"
+          ]
+        },
+        {
+          "feature": "이메일 발송",
+          "details": [
+            "개별 이메일 발송 기능",
+            "실시간 발송 상태 추적",
+            "진행률 표시 기능"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "UI/UX 개선",
+      "changes": [
+        {
+          "feature": "디자인 시스템",
+          "details": [
+            "Noto Sans KR 폰트 적용",
+            "일관된 색상 팔레트 적용",
+            "카드 디자인 개선",
+            "반응형 레이아웃 구현"
+          ]
+        },
+        {
+          "feature": "대시보드",
+          "details": [
+            "시스템 개요 섹션 추가",
+            "메인 기능 카드 메뉴",
+            "메트릭 카드 디자인",
+            "시각적 피드백 개선"
+          ]
+        },
+        {
+          "feature": "데이터 시각화",
+          "details": [
+            "Plotly 차트 도입",
+            "인터랙티브 도넛 차트",
+            "응답률 메트릭 표시",
+            "만족도 분포 시각화"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "Gmail API 통합",
+      "conversations": [
+        {
+          "user": "Gmail API 대신 다른 방법은 없어?",
+          "assistant": {
+            "alternatives": [
+              {
+                "method": "SMTP",
+                "options": [
+                  "Gmail SMTP",
+                  "Naver 메일 SMTP",
+                  "회사 메일 서버 SMTP"
+                ]
+              },
+              {
+                "method": "이메일 서비스 API",
+                "options": [
+                  "SendGrid",
+                  "Amazon SES",
+                  "Mailgun"
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "user": "get_gmail_service라는 함수를 참고해서 한번 해볼 수 있어?",
+          "assistant": "Gmail API 인증 방식 비교 및 수정 제안"
+        },
+        {
+          "user": "Streamlit_app_email_simple.py가 이메일 보내는데 에러가 나잖아. streamlit_app_email.py에서는 에러가 안났었거든....",
+          "assistant": {
+            "changes": [
+              "port=0으로 자동 포트 할당",
+              "불필요한 리디렉션 URI 제거",
+              "인증 프로세스 단순화"
+            ]
+          }
+        },
+        {
+          "user": "이 앱에서 잘못된 요청을 전송했으므로 로그인할 수 없습니다. 400 오류: redirect_uri_mismatch",
+          "assistant": {
+            "solution": "Google Cloud Console 설정 가이드",
+            "steps": [
+              "Google Cloud Console 접속",
+              "프로젝트 선택",
+              "API 및 서비스 → 사용자 인증 정보",
+              "OAuth 2.0 클라이언트 ID 편집",
+              {
+                "redirect_uris": [
+                  "http://localhost:8501/",
+                  "http://localhost:8501",
+                  "http://127.0.0.1:8501/",
+                  "http://127.0.0.1:8501",
+                  "http://localhost:0/",
+                  "http://localhost:1234/",
+                  "http://127.0.0.1:1234/"
+                ]
+              },
+              "새로운 credentials.json 파일 다운로드 및 저장"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+} 
