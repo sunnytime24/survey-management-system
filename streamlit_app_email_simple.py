@@ -20,6 +20,9 @@ from openai import OpenAI
 import plotly.express as px
 import plotly.graph_objects as go
 import requests
+from dotenv import load_dotenv
+import smtplib
+import httpx
 
 # 페이지 설정
 st.set_page_config(
@@ -961,7 +964,7 @@ def main():
                                 form_url = create_google_form(topic, questions)
                                 if form_url:
                                     st.success("Google Forms가 생성되었습니다!")
-                                    st.markdown(f"[설문지 링크]({form_url})")
+                                    st.markdown(f"[설문 링크]({form_url})")
                                     st.session_state.form_url = form_url
                             except Exception as e:
                                 st.error(f"Google Forms 생성 중 오류 발생: {str(e)}")
